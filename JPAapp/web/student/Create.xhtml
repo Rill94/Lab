@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateStudentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateStudentLabel_idStudent}" for="idStudent" />
+                    <h:inputText id="idStudent" value="#{studentController.selected.idStudent}" title="#{bundle.CreateStudentTitle_idStudent}" required="true" requiredMessage="#{bundle.CreateStudentRequiredMessage_idStudent}"/>
+                    <h:outputLabel value="#{bundle.CreateStudentLabel_birthDate}" for="birthDate" />
+                    <h:inputText id="birthDate" value="#{studentController.selected.birthDate}" title="#{bundle.CreateStudentTitle_birthDate}" required="true" requiredMessage="#{bundle.CreateStudentRequiredMessage_birthDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateStudentLabel_firstname}" for="firstname" />
+                    <h:inputTextarea rows="4" cols="30" id="firstname" value="#{studentController.selected.firstname}" title="#{bundle.CreateStudentTitle_firstname}" required="true" requiredMessage="#{bundle.CreateStudentRequiredMessage_firstname}"/>
+                    <h:outputLabel value="#{bundle.CreateStudentLabel_midname}" for="midname" />
+                    <h:inputTextarea rows="4" cols="30" id="midname" value="#{studentController.selected.midname}" title="#{bundle.CreateStudentTitle_midname}" required="true" requiredMessage="#{bundle.CreateStudentRequiredMessage_midname}"/>
+                    <h:outputLabel value="#{bundle.CreateStudentLabel_lastname}" for="lastname" />
+                    <h:inputTextarea rows="4" cols="30" id="lastname" value="#{studentController.selected.lastname}" title="#{bundle.CreateStudentTitle_lastname}" required="true" requiredMessage="#{bundle.CreateStudentRequiredMessage_lastname}"/>
+                    <h:outputLabel value="#{bundle.CreateStudentLabel_gender}" for="gender" />
+                    <h:inputText id="gender" value="#{studentController.selected.gender}" title="#{bundle.CreateStudentTitle_gender}" required="true" requiredMessage="#{bundle.CreateStudentRequiredMessage_gender}"/>
+                    <h:outputLabel value="#{bundle.CreateStudentLabel_phoneNumber}" for="phoneNumber" />
+                    <h:inputText id="phoneNumber" value="#{studentController.selected.phoneNumber}" title="#{bundle.CreateStudentTitle_phoneNumber}" required="true" requiredMessage="#{bundle.CreateStudentRequiredMessage_phoneNumber}"/>
+                    <h:outputLabel value="#{bundle.CreateStudentLabel_groupID}" for="groupID" />
+                    <h:selectOneMenu id="groupID" value="#{studentController.selected.groupID}" title="#{bundle.CreateStudentTitle_groupID}" required="true" requiredMessage="#{bundle.CreateStudentRequiredMessage_groupID}">
+                        <f:selectItems value="#{studentGroupController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{studentController.create}" value="#{bundle.CreateStudentSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{studentController.prepareList}" value="#{bundle.CreateStudentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateStudentIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

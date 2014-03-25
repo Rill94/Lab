@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditStudentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditStudentLabel_idStudent}" for="idStudent" />
+                    <h:inputText id="idStudent" value="#{studentController.selected.idStudent}" title="#{bundle.EditStudentTitle_idStudent}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_idStudent}"/>
+                    <h:outputLabel value="#{bundle.EditStudentLabel_birthDate}" for="birthDate" />
+                    <h:inputText id="birthDate" value="#{studentController.selected.birthDate}" title="#{bundle.EditStudentTitle_birthDate}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_birthDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditStudentLabel_firstname}" for="firstname" />
+                    <h:inputTextarea rows="4" cols="30" id="firstname" value="#{studentController.selected.firstname}" title="#{bundle.EditStudentTitle_firstname}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_firstname}"/>
+                    <h:outputLabel value="#{bundle.EditStudentLabel_midname}" for="midname" />
+                    <h:inputTextarea rows="4" cols="30" id="midname" value="#{studentController.selected.midname}" title="#{bundle.EditStudentTitle_midname}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_midname}"/>
+                    <h:outputLabel value="#{bundle.EditStudentLabel_lastname}" for="lastname" />
+                    <h:inputTextarea rows="4" cols="30" id="lastname" value="#{studentController.selected.lastname}" title="#{bundle.EditStudentTitle_lastname}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_lastname}"/>
+                    <h:outputLabel value="#{bundle.EditStudentLabel_gender}" for="gender" />
+                    <h:inputText id="gender" value="#{studentController.selected.gender}" title="#{bundle.EditStudentTitle_gender}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_gender}"/>
+                    <h:outputLabel value="#{bundle.EditStudentLabel_phoneNumber}" for="phoneNumber" />
+                    <h:inputText id="phoneNumber" value="#{studentController.selected.phoneNumber}" title="#{bundle.EditStudentTitle_phoneNumber}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_phoneNumber}"/>
+                    <h:outputLabel value="#{bundle.EditStudentLabel_groupID}" for="groupID" />
+                    <h:selectOneMenu id="groupID" value="#{studentController.selected.groupID}" title="#{bundle.EditStudentTitle_groupID}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_groupID}">
+                        <f:selectItems value="#{studentGroupController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{studentController.update}" value="#{bundle.EditStudentSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditStudentViewLink}"/>
+                <br />
+                <h:commandLink action="#{studentController.prepareList}" value="#{bundle.EditStudentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditStudentIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

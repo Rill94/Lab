@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListScheduleTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListScheduleEmpty}" rendered="#{scheduleController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{scheduleController.items.rowCount > 0}">
+                    <h:outputText value="#{scheduleController.pagination.pageFirstItem + 1}..#{scheduleController.pagination.pageLastItem + 1}/#{scheduleController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{scheduleController.previous}" value="#{bundle.Previous} #{scheduleController.pagination.pageSize}" rendered="#{scheduleController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{scheduleController.next}" value="#{bundle.Next} #{scheduleController.pagination.pageSize}" rendered="#{scheduleController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{scheduleController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListScheduleTitle_idSchedule}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSchedule}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListScheduleTitle_date}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.date}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListScheduleTitle_theme}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.theme}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListScheduleTitle_classShape}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.classShape}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListScheduleTitle_numOfAH}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numOfAH}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListScheduleTitle_subjectID}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.subjectID}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{scheduleController.prepareView}" value="#{bundle.ListScheduleViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{scheduleController.prepareEdit}" value="#{bundle.ListScheduleEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{scheduleController.destroy}" value="#{bundle.ListScheduleDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{scheduleController.prepareCreate}" value="#{bundle.ListScheduleCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListScheduleIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

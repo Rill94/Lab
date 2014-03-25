@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateScheduleTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateScheduleLabel_idSchedule}" for="idSchedule" />
+                    <h:inputText id="idSchedule" value="#{scheduleController.selected.idSchedule}" title="#{bundle.CreateScheduleTitle_idSchedule}" required="true" requiredMessage="#{bundle.CreateScheduleRequiredMessage_idSchedule}"/>
+                    <h:outputLabel value="#{bundle.CreateScheduleLabel_date}" for="date" />
+                    <h:inputText id="date" value="#{scheduleController.selected.date}" title="#{bundle.CreateScheduleTitle_date}" required="true" requiredMessage="#{bundle.CreateScheduleRequiredMessage_date}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateScheduleLabel_theme}" for="theme" />
+                    <h:inputTextarea rows="4" cols="30" id="theme" value="#{scheduleController.selected.theme}" title="#{bundle.CreateScheduleTitle_theme}" required="true" requiredMessage="#{bundle.CreateScheduleRequiredMessage_theme}"/>
+                    <h:outputLabel value="#{bundle.CreateScheduleLabel_classShape}" for="classShape" />
+                    <h:inputText id="classShape" value="#{scheduleController.selected.classShape}" title="#{bundle.CreateScheduleTitle_classShape}" required="true" requiredMessage="#{bundle.CreateScheduleRequiredMessage_classShape}"/>
+                    <h:outputLabel value="#{bundle.CreateScheduleLabel_numOfAH}" for="numOfAH" />
+                    <h:inputText id="numOfAH" value="#{scheduleController.selected.numOfAH}" title="#{bundle.CreateScheduleTitle_numOfAH}" required="true" requiredMessage="#{bundle.CreateScheduleRequiredMessage_numOfAH}"/>
+                    <h:outputLabel value="#{bundle.CreateScheduleLabel_subjectID}" for="subjectID" />
+                    <h:selectOneMenu id="subjectID" value="#{scheduleController.selected.subjectID}" title="#{bundle.CreateScheduleTitle_subjectID}" required="true" requiredMessage="#{bundle.CreateScheduleRequiredMessage_subjectID}">
+                        <f:selectItems value="#{subjectController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{scheduleController.create}" value="#{bundle.CreateScheduleSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{scheduleController.prepareList}" value="#{bundle.CreateScheduleShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateScheduleIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
